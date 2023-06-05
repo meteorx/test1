@@ -1,10 +1,8 @@
 name: CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  schedule:
+    - cron: '*/5 * * * *'
 
   workflow_dispatch:
 
@@ -14,21 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a multi-line script
+      - name: auto commit
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
-  deploy:
-    runs-on: ubuntu-latest
-    
-    needs: build
-    
-    steps:
-      - name: deploy to test1 repo
+          git config --global user.name "Your Name"
+          git config --global user.email "your.email@example.com"
+      - name: Commit and push changes
         run: |
-          ls -al
+          date >> action_log
+          git add action_log
+          git commit -m "auto push"
+          git push
