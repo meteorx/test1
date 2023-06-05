@@ -16,6 +16,7 @@ jobs:
         run: |
           git config --global user.name "Your Name"
           git config --global user.email "your.email@example.com"
+          git remote set-url origin git@github.com:meteorx/test1.git
       - name: Commit and push changes
         run: |
           date >> action_log
